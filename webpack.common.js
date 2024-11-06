@@ -10,7 +10,7 @@ module.exports = {
       __dirname,
       "src/scripts/restaurant-details.js"
     ),
-    favorites: path.resolve(__dirname, "src/scripts/favorites.js"), // Add favorites.js entry point
+    favorites: path.resolve(__dirname, "src/scripts/favorites.js"),
   },
   output: {
     filename: "[name].bundle.js",
@@ -31,13 +31,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.resolve(__dirname, "src/templates/index.html"),
-      chunks: ["app"], // Only include index.js in index.html
+      chunks: ["app"],
     }),
 
     new HtmlWebpackPlugin({
       filename: "favorites.html",
       template: path.resolve(__dirname, "src/templates/favorites.html"),
-      chunks: ["favorites"], // Now correctly includes favorites.js
+      chunks: ["favorites"],
     }),
 
     new HtmlWebpackPlugin({
@@ -46,7 +46,7 @@ module.exports = {
         __dirname,
         "src/templates/restaurant-details.html"
       ),
-      chunks: ["restaurantDetails"], // Only include restaurant-details.js in restaurant-details.html
+      chunks: ["restaurantDetails"],
     }),
 
     new CopyWebpackPlugin({
@@ -54,6 +54,14 @@ module.exports = {
         {
           from: path.resolve(__dirname, "src/public/"),
           to: path.resolve(__dirname, "dist/"),
+        },
+        {
+          from: path.resolve(__dirname, "src/sw.js"),
+          to: path.resolve(__dirname, "dist/sw.js"),
+        },
+        {
+          from: path.resolve(__dirname, "src/manifest.json"),
+          to: path.resolve(__dirname, "dist/manifest.json"),
         },
       ],
     }),

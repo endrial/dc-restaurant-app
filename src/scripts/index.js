@@ -1,6 +1,29 @@
 import "regenerator-runtime";
 import "../styles/main.css";
 
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  const installButton = document.getElementById("install-button");
+  installButton.style.display = "block"; // Show the install button
+
+  installButton.addEventListener("click", () => {
+    deferredPrompt.prompt(); // Show the install prompt
+
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("User accepted the A2HS prompt");
+      } else {
+        console.log("User dismissed the A2HS prompt");
+      }
+      deferredPrompt = null;
+    });
+  });
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   loadRestaurants();
 
@@ -20,19 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 });
 
-/*async function loadRestaurants() {
-  try {
-    console.log("Mengambil data restoran...");
-    const response = await fetch("data/DATA.json");
-    if (!response.ok) throw new Error("Gagal mengambil data");
-
-    const data = await response.json();
-    displayRestaurants(data.restaurants);
-  } catch (error) {
-    console.error("Error:", error);
-    showError("Gagal mengambil data restoran. Silakan coba lagi nanti.");
-  }
-}*/
 async function loadRestaurants() {
   try {
     console.log("Fetching restaurant data from API...");
@@ -55,25 +65,6 @@ function displayRestaurants(restaurants) {
     restaurantsContainer.appendChild(createRestaurantElement(restaurant));
   });
 }
-
-/*function createRestaurantElement({
-  pictureId,
-  name,
-  city,
-  rating,
-  description,
-}) {
-  return createElement(`
-    <div class="restaurant-item" tabindex="0">
-      <img src="${pictureId}" alt="${name}" class="restaurant-image"/>
-      <div class="restaurant-content">
-        <h3>${name}</h3>
-        <p>${city} - ${generateStarRating(rating)}</p>
-        <p>${description}</p>
-      </div>
-    </div>
-  `);
-}*/
 function createRestaurantElement({
   pictureId,
   name,
@@ -132,4 +123,20 @@ function createElement(html) {
   const template = document.createElement("template");
   template.innerHTML = html.trim();
   return template.content.firstChild;
+}
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((registration) => {
+        console.log(
+          "Service Worker registered with scope:",
+          registration.scope
+        );
+      })
+      .catch((error) => {
+        console.error("Service Worker registration failed:", error);
+      });
+  });
 }

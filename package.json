@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "idb": "^8.0.0",
-    "regenerator-runtime": "^0.14.0"
+    "regenerator-runtime": "^0.14.0",
+    "workbox-cli": "^7.3.0"
   }
 }
