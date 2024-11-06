@@ -20,6 +20,19 @@ a:focus,
   outline: 2px dashed #fff;
 }
 
+#add-to-home-screen {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none; /* Hidden by default */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .skip-link {
   position: absolute;
   top: -40px;
