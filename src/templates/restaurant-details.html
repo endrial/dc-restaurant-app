@@ -4,19 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Restaurant Details - Restau-Run</title>
-    <link rel="stylesheet" href="main.css" />
   </head>
   <body>
     <header>
-      <h1>Restaurant Details</h1>
+      <nav class="navbar" role="navigation">
+        <h1>Restau-Run</h1>
+        <button class="hamburger" aria-label="Menu Navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/favorites.html">Favorite</a></li>
+          <li>
+            <a href="https://github.com/endrialmp" target="_blank">About Us</a>
+          </li>
+        </ul>
+      </nav>
     </header>
-    <main>
-      <section id="restaurant-details" class="restaurant-details">
-        <!-- Restaurant details will be populated here by JavaScript -->
-      </section>
+    <main class="restaurant-details">
+      <h1 style="text-align: center">Restaurant Details</h1>
+      <section id="restaurant-details" class="restaurant-details"></section>
       <button id="favorite-button" class="favorite-button">
         Add to Favorites
       </button>
     </main>
+    <footer>
+      <p>Copyright &copy; 2024 Restau-Run</p>
+    </footer>
   </body>
 </html>

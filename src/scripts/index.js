@@ -8,10 +8,10 @@ window.addEventListener("beforeinstallprompt", (e) => {
   deferredPrompt = e;
 
   const installButton = document.getElementById("install-button");
-  installButton.style.display = "block"; // Show the install button
+  installButton.style.display = "block";
 
   installButton.addEventListener("click", () => {
-    deferredPrompt.prompt(); // Show the install prompt
+    deferredPrompt.prompt();
 
     deferredPrompt.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === "accepted") {
@@ -78,8 +78,10 @@ function createRestaurantElement({
       <img src="https://restaurant-api.dicoding.dev/images/medium/${pictureId}" alt="${name}" class="restaurant-image"/>
       <div class="restaurant-content">
         <h3>${name}</h3>
-        <p>${city} - ${generateStarRating(rating)}</p>
-        <p>${description}</p>
+        <p class="restaurant-location">${city} - ${generateStarRating(
+    rating
+  )}</p>
+        <p class="restaurant-description">${description}</p>
         <a href="restaurant-details.html?id=${id}" class="detail-link">View Details</a>
       </div>
     </div>

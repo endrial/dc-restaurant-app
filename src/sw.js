@@ -6,7 +6,6 @@ const urlsToCache = [
   "/restaurant-details.html",
   "/styles/main.css",
   "/scripts/main.bundle.js",
-  // Add any other essential files here
 ];
 
 self.addEventListener("install", (event) => {
